@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { create, all } from 'mathjs';
 import configData from 'src/data/config.json'
+import { IComponent } from '../interfaces/interface';
 
 const config = { }
 const math = create(all, config)
@@ -60,6 +61,13 @@ export class GridDisplayComponent implements OnInit {
       this.grid.subset(math.index(arrx, arry), arr1);
     }
     return true;
+  }
+
+  getComponentPosition(c: IComponent){
+    return [c['position-x']+1,c['position-y']+1]
+  }
+  getComponentDelta(c: IComponent){
+    return [c['rows'],c['columns']]
   }
 }
 

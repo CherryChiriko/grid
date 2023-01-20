@@ -10,5 +10,34 @@
     </div>
 </div>
 {{grid}}
+<!-- <div class="container m-4">
+<div class="grid3" style="--col: repeat({{gridDim[1]}}, 1fr); --row: repeat({{gridDim[0]}}, 1fr);">
+    <div class="box3 rounded" id="j">j</div>
+    <div class="box3 rounded">o</div>
+    <div class="box3 rounded">e</div>
+    <div class="box3 rounded">l</div>
+</div>
+</div> -->
+
+<div class="container m-4" *ngFor="let c of gridConfig.components">
+<div class="grid3" 
+
+style="--row: repeat({{gridDim[0]}}, 1fr); --col: repeat({{gridDim[1]}}, 1fr);">
+    <div class="box3 rounded" 
+    style="--x: {{getComponentPosition(c)[0]}}; --y: {{getComponentPosition(c)[1]}};
+     --dx: {{getComponentDelta(c)[0]}}; --dy:{{getComponentDelta(c)[0]}};">
+    component
+    </div>
+    <div class="box3 rounded">J</div>
+    <div class="box3 rounded">o</div>
+    <div class="box3 rounded">e</div>
+    <div class="box3 rounded">a</div>
+    <div class="box3 rounded">l</div>
+    <div class="box3 rounded">N</div>
+    <div class="box3 rounded">o</div>
+</div>
+</div>
 
 <!-- *ngFor="let c of gridConfig.components" -->
+<!-- <p>{{getComponentPosition(c)}}</p>
+    <p>{{getComponentDelta(c)}}</p> -->

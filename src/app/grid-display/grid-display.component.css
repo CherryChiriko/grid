@@ -55,3 +55,19 @@
     /* background-color: blueviolet;
     border: red;
 } */ 
+
+.grid3 {
+    display: grid;
+    grid-template-columns: var(--col);
+    grid-template-rows: var(--row);
+    row-gap: .5rem; column-gap: .5rem;
+  }
+  
+.box3 {
+    background-color: aquamarine;
+    border: 1px solid orange;
+    width: 100%; height:100%;
+    display: flex; justify-content: center; align-items: center;
+    grid-area: var(--x) / var(--y) / span var(--dx) / span var(--dy);
+    /* grid-area: var(--x) / var(--y) / span var(--dx) / span 3; */
+}
