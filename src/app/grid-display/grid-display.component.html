@@ -1,6 +1,14 @@
-<p>grid-display works!</p>
-<div class="container" *ngFor="let c of gridConfig.components">
-    <p>{{c}}</p>
+<div class="container mt-4" >
+    <div class="grid" *ngFor="let row of gridRow">
+    <div *ngFor="let col of gridCol">
+        <div class="box rounded text-center">{{row}}</div>
+    </div>
+    </div>
+
+    <div class="grid2" >
+        <div class="box">i</div>
+    </div>
 </div>
 {{grid}}
 
+<!-- *ngFor="let c of gridConfig.components" -->
