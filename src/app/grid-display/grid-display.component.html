@@ -1,4 +1,4 @@
-<div class="container mt-4" >
+<!-- <div class="container mt-4" >
     <div class="grid" *ngFor="let row of gridRow">
     <div *ngFor="let col of gridCol">
         <div class="box rounded text-center">{{row}}</div>
@@ -8,7 +8,7 @@
     <div class="grid2" >
         <div class="box">i</div>
     </div>
-</div>
+</div> -->
 {{grid}}
 <!-- <div class="container m-4">
 <div class="grid3" style="--col: repeat({{gridDim[1]}}, 1fr); --row: repeat({{gridDim[0]}}, 1fr);">
@@ -19,25 +19,56 @@
 </div>
 </div> -->
 
-<div class="container m-4" *ngFor="let c of gridConfig.components">
-<div class="grid3" 
+<!-- <div class="container m-4" *ngFor="let c of gridConfig.components" >
+<div class="grid" 
 
 style="--row: repeat({{gridDim[0]}}, 1fr); --col: repeat({{gridDim[1]}}, 1fr);">
-    <div class="box3 rounded" 
+    <div class="box rounded" 
     style="--x: {{getComponentPosition(c)[0]}}; --y: {{getComponentPosition(c)[1]}};
      --dx: {{getComponentDelta(c)[0]}}; --dy:{{getComponentDelta(c)[0]}};">
     component
     </div>
-    <div class="box3 rounded">J</div>
-    <div class="box3 rounded">o</div>
-    <div class="box3 rounded">e</div>
-    <div class="box3 rounded">a</div>
-    <div class="box3 rounded">l</div>
-    <div class="box3 rounded">N</div>
-    <div class="box3 rounded">o</div>
+    <div class="box rounded">J</div>
+    <div class="box rounded">o</div>
+    <div class="box rounded">e</div>
+    <div class="box rounded">a</div>
+    <div class="box rounded">l</div>
+    <div class="box rounded">N</div>
+    <div class="box rounded">o</div>
 </div>
-</div>
+</div> -->
 
 <!-- *ngFor="let c of gridConfig.components" -->
 <!-- <p>{{getComponentPosition(c)}}</p>
     <p>{{getComponentDelta(c)}}</p> -->
+
+
+<div class="container m-4">
+    <div class="grid" *ngIf="canDrawGrid"
+    style="--row: repeat({{gridDim[0]}}, 1fr); --col: repeat({{gridDim[1]}}, 1fr);">
+    <div *ngFor="let row of gridRow">
+        <div class="box" *ngFor="let col of gridCol">a</div>
+        <div class="box" style="--x: 1; --y: 1; --dx: 1; --dy: 3;">
+            component
+        </div>
+    </div>
+    
+    <!-- <div class="box" >component</div> -->
+</div>
+</div> 
+<!-- *ngFor="let c of gridConfig.components" > -->
+    <!-- <div class="grid" 
+    
+    style="--row: repeat({{gridDim[0]}}, 1fr); --col: repeat({{gridDim[1]}}, 1fr);">
+        <div class="box rounded" 
+        >
+        component
+        </div>
+        <div class="box rounded">J</div>
+        <div class="box rounded">o</div>
+        <div class="box rounded">e</div>
+        <div class="box rounded">a</div>
+        <div class="box rounded">l</div>
+        <div class="box rounded">N</div>
+        <div class="box rounded">o</div>
+    </div> -->

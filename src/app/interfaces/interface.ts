@@ -1,8 +1,8 @@
 export interface IComponent {
   rows: number;
   columns: number;
-  "position-x": number;
-  "position-y": number;
+  posX: number;
+  posY: number;
   pic: string;
   rotation: number;
 }
