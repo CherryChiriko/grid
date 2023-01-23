@@ -71,37 +71,21 @@ export class GridDisplayComponent implements OnInit {
         try{
           
             let m = math.subset(this.grid, math.index(arrR, arrC));
-            // const matrix_ex = math.matrix([[1,2,3,10],[4,5,6,11],[7,8,9,12],[13,14,15,16]])
-            // console.log(m)
   
             for (let i=0; i<dx; i++){
               for (let j=0; j<dy; j++){
-                // console.log(j,i)
-                // console.log(matrix_ex.get([j,i]))
-                // console.log(m.get([j,i]))
-                if (m.get([j,i]) !== 0) {
-                  console.log("Occupied")
-                  return false;}
+                if (m.get([j,i]) !== 0) {return false;}
               }
             }
-            console.log("ok")
-            // for (let r=0; r<(x+dx); r++){
-            //   for (let clmn=0; clmn<(y+dy); clmn++){
-            //     if(m.get([r,clmn]) !== 0){ return false }
-            //   }
-            // }
           } catch{return false;}
           this.grid.subset(math.index(arrR, arrC), arr1);
       } catch{return false;}
-      
-      
-      
     }
     return true;
   }
 
   getComponentPosition(c: IComponent){
-    return [c['position-x'] + 1 , c['position-y'] + 1]
+    return [c['position-x'] + 1, c['position-y'] + 1 ]
   }
   getComponentDelta(c: IComponent){
     return [c['dx'],c['dy']]

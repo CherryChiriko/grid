@@ -1,26 +1,25 @@
-{{grid}}
+<!-- {{grid}} -->
 
+<div class="container mt-5" *ngIf="!canDrawGrid">
+    <div class="alert-danger alert text-center" >
+        Grid not valid, please retry.
+    </div>
+</div>
 
 <div class="container mx-auto my-auto mt-4" *ngIf="canDrawGrid">
     <div class="grid my-auto mx-auto"  
     
     style="--row: repeat({{gridDim[0]}}, 1fr); --col: repeat({{gridDim[1]}}, 1fr);">
 
-    <div class="box rounded"  *ngFor="let c of gridConfig.components"
+    <div class="box rounded"  *ngFor="let c of gridConfig.components; let i=index"
     style="--x: {{getComponentPosition(c)[0]}}; --y: {{getComponentPosition(c)[1]}};
-     --dx: {{getComponentDelta(c)[0]}}; --dy:{{getComponentDelta(c)[0]}};">
-    <!-- <img class="rounded" src="{{getComponentPicture(c)[0]}}" 
-    style="--rotation: {{getComponentPicture(c)[1]}}deg"> -->
-        component, 
+     --dx: {{getComponentDelta(c)[0]}}; --dy:{{getComponentDelta(c)[1]}};">
+    <img class="rounded" src="{{getComponentPicture(c)[0]}}" 
+    style="--rotation: {{getComponentPicture(c)[1]}}deg">
+        <!-- component {{i}}, 
         x:  {{getComponentPosition(c)[0]}}, y: {{getComponentPosition(c)[1]}}
-        dx:  {{getComponentDelta(c)[0]}}, dy: {{getComponentDelta(c)[1]}}
+        dx:  {{getComponentDelta(c)[0]}}, dy: {{getComponentDelta(c)[1]}} -->
     </div>
-    <div class="box rounded">J</div>
-    <div class="box rounded">o</div>
-    <div class="box rounded">e</div>
-    <div class="box rounded">N</div>
-    <div class="box rounded">a</div>
-    <div class="box rounded">n</div>
 
 </div>
 </div> 
