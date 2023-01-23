@@ -22,7 +22,17 @@ const data = Joi.object({
   //   Joi.string().required(),
   //   Joi.number().integer().required().valid(0,90,180,270),
   // ]
-  components: Joi.array<IComponent>().required(),
+  // components: Joi.array<IComponent>().required(),
+  components: Joi.array().items(
+    Joi.object({
+      dx: Joi.number().integer().required(),
+      dy: Joi.number().integer().required(),
+      "position-x": Joi.number().integer().required(),
+      "position-y": Joi.number().integer().required(),
+      pic: Joi.string().required(),
+      rotation: Joi.number().integer().required().valid(0,90,180,270),
+    })
+  )
 })
 
 @Component({
@@ -32,8 +42,10 @@ const data = Joi.object({
 })
 
 export class GridDisplayComponent implements OnInit {
+
   private URL = '../assets/config.json';
   constructor(private http: HttpClient){}
+
   gridConfig !: any ;
   gridDim : number[] = [];
   grid !: math.Matrix;

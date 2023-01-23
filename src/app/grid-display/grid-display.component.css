@@ -1,49 +1,9 @@
-/* .grid {
-    display: grid;
-    grid: repeat(1, 6rem) / auto-flow 6rem;
-}
-  
-.grid > div {
-    background-color: #8ca0ff;
-    width: 5rem;    height: 5rem;
-    border-radius: 15%; 
-    display: flex; justify-content: center; align-items: center;
-}
-.grid2{
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-}
-
-.grid2 > div {
-    grid-area: 1 / 2 / span 3 / span 2;
-    background-color: blueviolet;
-    width: 5rem;    height: 5rem;
-    border-radius: 15%; 
-    display: flex; justify-content: center; align-items: center;
-} */
-  
-/* .box { */
-    /* border-radius: 15px; */
-    /* display: flex; justify-content: center; align-items: center; */
-    /* background-color: blueviolet; */
-    /* border: red; */
-/* } */
-/* .box {
-    /* grid-area: 1 / 1 / span 3 / span 1;
-    font-size: 1.7rem;
-    display: grid;
-    grid-template-columns: 1.5fr 0.5fr; */
-    /* grid-area: 1 / 1 / span 1 / span 1; */
-    /* background-color: blueviolet;
-    border: red;
-} */ 
-
 .grid {
     display: grid;
     grid-template-columns: var(--col);
     grid-template-rows: var(--row);
     row-gap: .5rem; column-gap: .5rem;
-    height: 90vh;
+    max-height: 90vh; 
   }
   
 .box {
@@ -58,3 +18,15 @@ img {
     transform: rotate(var(--rotation));
     border: 2px solid black;
 }
+
+/* @media (max-width: 1400px) {
+    .grid{ background-color: green;}
+    .box{ */
+        /* width:80%; */
+        /* border: 1px red solid;
+    }
+    img {
+        transform: rotate(90deg);
+    }
+     */
+/* } */
