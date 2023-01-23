@@ -24,14 +24,6 @@ const data = Joi.object({
   .required(),
 })
 
-// data.validate({ username: 'abc', birth_year: 1994 });
-// data.validate({});
-// try {
-//   const value = await data.validateAsync({ username: 'abc', birth_year: 1994 });
-// }
-// catch (err) { }
-
-
 @Component({
   selector: 'app-grid-display',
   templateUrl: './grid-display.component.html',
@@ -51,10 +43,11 @@ export class GridDisplayComponent implements OnInit {
 
   ngOnInit(){
     if(!data.validate(configData).error){
-      this.canDrawGrid = true;
+      // this.canDrawGrid = true; 
       if (this.checkGrid()){
-        // this.canDrawGrid = true;
+        this.canDrawGrid = true;
       }
+      console.log(this.canDrawGrid)
     }
   }
   
@@ -75,8 +68,8 @@ export class GridDisplayComponent implements OnInit {
       }
 
       let arr1 = math.ones([row,col]);
-      let arrx = [...Array(row).keys()].map(n=> n+position[0]);
-      let arry = [...Array(col).keys()].map(n=> n+position[1]);
+      let arrx = [...Array(row).keys()].map(n => n + position[0]);
+      let arry = [...Array(col).keys()].map(n => n + position[1]);
 
       try{
         let m = math.subset(this.grid, math.index(arrx, arry));
@@ -95,10 +88,13 @@ export class GridDisplayComponent implements OnInit {
   }
 
   getComponentPosition(c: IComponent){
-    return [c.posX + 1 ,c.posY + 1]
+    return [c['position-x'] + 1 , c['position-y'] + 1]
   }
   getComponentDelta(c: IComponent){
     return [c['rows'],c['columns']]
+  }
+  getComponentPicture(c: IComponent){
+    return [c['pic'],c['rotation']]
   }
 
 }

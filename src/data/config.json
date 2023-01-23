@@ -2,8 +2,14 @@
     "grid-rows": 3,
     "grid-columns": 3,
     "components": [
-        { "rows": 1, "columns": 1, "position-x": 0, "position-y": 0, "pic": "", "rotation": 0},
-        { "rows": 2, "columns": 3, "position-x": 1, "position-y": 0, "pic": "", "rotation": 0},
-        { "rows": 3, "columns": 1, "position-x": 0, "position-y": 0, "pic": "", "rotation": 0}
+        { "rows": 1, "columns": 1, "position-x": 0, "position-y": 0, 
+        "pic": "https://cdn.britannica.com/25/4825-050-977D8C5E/Flag-United-Kingdom.jpg", 
+        "rotation": 0},
+        { "rows": 1, "columns": 1, "position-x": 1, "position-y": 1, 
+        "pic": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/54/Naval_ensign_of_the_Empire_of_Japan.svg/1200px-Naval_ensign_of_the_Empire_of_Japan.svg.png", 
+        "rotation": 0},
+        { "rows": 1, "columns": 1, "position-x": 2, "position-y": 2, 
+        "pic": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Flag_of_the_People%27s_Republic_of_China.svg/1280px-Flag_of_the_People%27s_Republic_of_China.svg.png", 
+        "rotation": 180}
     ]
  }
