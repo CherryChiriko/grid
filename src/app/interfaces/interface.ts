@@ -6,3 +6,9 @@ export interface IComponent {
   pic: string;
   rotation: number;
 }
+
+export interface IData {
+  "grid-rows": number,
+  "grid-columns": number,
+  components: IComponent 
+}

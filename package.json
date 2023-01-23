@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^15.0.0",
     "@angular/router": "^15.0.0",
     "joi": "^17.7.0",
+    "joi-strict": "^2.0.1",
     "mathjs": "^11.5.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

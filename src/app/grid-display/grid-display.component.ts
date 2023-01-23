@@ -1,17 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { create, all } from 'mathjs';
-import configData from 'src/data/config.json'
-import { IComponent } from '../interfaces/interface';
+// import configData from 'src/assets/config.json'
+import { IComponent, IData } from '../interfaces/interface';
 import * as Joi from "joi";
+import { HttpClient } from '@angular/common/http';
 
 const config = { }
 const math = create(all, config)
 
+const emptyData : IData = {  "grid-rows": 0,  "grid-columns": 0,  "components":
+  {dx:0, dy:0, "position-x":0, "position-y":0, pic:"", rotation:0}}
+
 const data = Joi.object({
-  "grid-rows": Joi.number()
-      .required().integer(),
-  "grid-columns": Joi.number()
-  .required().integer(),
+  "grid-rows": Joi.number().required().integer().strict(),
+  "grid-columns": Joi.number().required().integer().strict(),
   // components: [
   //   Joi.number().integer().required(),
   //   Joi.number().integer().required(),
@@ -20,8 +22,7 @@ const data = Joi.object({
   //   Joi.string().required(),
   //   Joi.number().integer().required().valid(0,90,180,270),
   // ]
-  components: Joi.array<IComponent>()
-  .required(),
+  components: Joi.array<IComponent>().required(),
 })
 
 @Component({
@@ -31,24 +32,28 @@ const data = Joi.object({
 })
 
 export class GridDisplayComponent implements OnInit {
-
-  gridConfig = configData;
-  gridDim : number[] = [this.gridConfig?.["grid-rows"], this.gridConfig?.["grid-columns"]];
-  grid : math.Matrix = math.matrix(math.zeros(this.gridDim));
-
-  gridRow = [...Array(this.gridConfig?.["grid-rows"]).keys()]
-  gridCol = [...Array(this.gridConfig?.["grid-columns"]).keys()]
-
+  private URL = '../assets/config.json';
+  constructor(private http: HttpClient){}
+  gridConfig !: any ;
+  gridDim : number[] = [];
+  grid !: math.Matrix;
+  
   canDrawGrid : boolean = false;
 
   ngOnInit(){
-    if(!data.validate(configData).error){
-      // this.canDrawGrid = true; 
-      if (this.checkGrid()){
-        this.canDrawGrid = true;
+    this.http.get(this.URL).subscribe( dat => 
+      {
+        this.gridConfig = !data.validate(dat).error? dat : emptyData;
+        console.log(this.gridConfig)
+        this.gridDim = [this.gridConfig?.["grid-rows"], this.gridConfig?.["grid-columns"]];
+        this.grid = math.matrix(math.zeros(this.gridDim));
+        if (this.gridDim[0]){
+          if (this.checkGrid()){
+            this.canDrawGrid = true;
+          }
+        }
       }
-      // console.log(this.grid, this.canDrawGrid)
-    }
+    );
   }
   
   checkGrid(){
@@ -95,35 +100,3 @@ export class GridDisplayComponent implements OnInit {
   }
 
 }
-
-// const matrix_ex = math.matrix([[1,2,3,10],[4,5,6,11],[7,8,9,12],[13,14,15,16]])
-// let m = math.subset(matrix_ex, math.index([0,1,2,3], [0,1,2,3]));
-
-//   // let k = math.zeros(dx,dy)
-        //   // console.log(m == k)
-
-
-      // try{
-      //   let m = math.subset(this.grid, math.index(arrx, arry));
-      //   // let k = math.zeros(dx,dy)
-      //   // console.log(m == k)
-      //   for (let r=0; r<(x+dx); r++){
-      //     for (let clmn=0; clmn<(y+dy); clmn++){
-      //       if(m.get([r,clmn]) !== 0){ return false }
-      //     }
-      //   }
-      // }      catch (error){ console.log(error);return false;}
-      
-      // this.grid.subset(math.index(arrx, arry), arr1);
-
-
-      // for (let i=x; i<(x+dx); i++){
-      //   for (let j=y; j<(y+dy); j++){
-      //     console.log(j,i)
-      //     // console.log(matrix_ex.get([j,i]))
-      //     console.log(this.grid.get([j,i]))
-      //     // if (m.get([j,i]) !== 0) {
-      //     //   console.log("Occupied")
-      //     //   return false;}
-      //   }
-      // }
