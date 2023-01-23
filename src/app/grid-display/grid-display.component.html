@@ -1,4 +1,4 @@
-<!-- {{grid}} -->
+{{grid}}
 
 
 <div class="container mx-auto my-auto mt-4" *ngIf="canDrawGrid">
@@ -9,9 +9,11 @@
     <div class="box rounded"  *ngFor="let c of gridConfig.components"
     style="--x: {{getComponentPosition(c)[0]}}; --y: {{getComponentPosition(c)[1]}};
      --dx: {{getComponentDelta(c)[0]}}; --dy:{{getComponentDelta(c)[0]}};">
-    <img class="rounded" src="{{getComponentPicture(c)[0]}}" 
-    style="--rotation: {{getComponentPicture(c)[1]}}deg">
- 
+    <!-- <img class="rounded" src="{{getComponentPicture(c)[0]}}" 
+    style="--rotation: {{getComponentPicture(c)[1]}}deg"> -->
+        component, 
+        x:  {{getComponentPosition(c)[0]}}, y: {{getComponentPosition(c)[1]}}
+        dx:  {{getComponentDelta(c)[0]}}, dy: {{getComponentDelta(c)[1]}}
     </div>
     <div class="box rounded">J</div>
     <div class="box rounded">o</div>

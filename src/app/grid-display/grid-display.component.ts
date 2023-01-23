@@ -47,42 +47,55 @@ export class GridDisplayComponent implements OnInit {
       if (this.checkGrid()){
         this.canDrawGrid = true;
       }
-      console.log(this.canDrawGrid)
+      // console.log(this.grid, this.canDrawGrid)
     }
   }
   
   checkGrid(){
     for (let c of this.gridConfig.components){
-    // for (let c of [
-    //   { "rows": 1, "columns": 1, "position-x": 0, "position-y": 0, "pic": "", "rotation": 0},
-    //   { "rows": 2, "columns": 3, "position-x": 1, "position-y": 0, "pic": "", "rotation": 0}
-    // ]){
-      
-      const position = [c?.['position-x'],c?.['position-y']];
-      const row = c?.['rows']; const col = c?.['columns'];
-      
-      if (row === 1 && col === 1){
-        if (this.grid.get([position[0],position[1]]) === 0){
-          this.grid.set([position[0],position[1]], 1); continue;
-        } else {return false;}
-      }
-
-      let arr1 = math.ones([row,col]);
-      let arrx = [...Array(row).keys()].map(n => n + position[0]);
-      let arry = [...Array(col).keys()].map(n => n + position[1]);
+      const [x,y]   = [c?.['position-x'], c?.['position-y']];
+      const [dx,dy] = [c?.['dx'],         c?.['dy']];
 
       try{
-        let m = math.subset(this.grid, math.index(arrx, arry));
-        // let k = math.zeros(row,col)
-        // console.log(m == k)
-        for (let r=0; r<row; r++){
-          for (let clmn=0; clmn<col; clmn++){
-            if(m.get([r,clmn]) !== 0){ return false }
-          }
+        
+        if (dx === 1 && dy === 1){
+          if (!this.grid.get([y,x])){
+            this.grid.set([y,x], 1); continue;
+          } else {return false;}
         }
-      }      catch (error){ console.log(error);return false;}
+        
+        const arr1 = math.ones([dy,dx]);                       // array of ones
+        const arrR = [...Array(dy).keys()].map(n => n + y);   // array for rows
+        const arrC = [...Array(dx).keys()].map(n => n + x);  // array for columns
+        
+        try{
+          
+            let m = math.subset(this.grid, math.index(arrR, arrC));
+            // const matrix_ex = math.matrix([[1,2,3,10],[4,5,6,11],[7,8,9,12],[13,14,15,16]])
+            // console.log(m)
+  
+            for (let i=0; i<dx; i++){
+              for (let j=0; j<dy; j++){
+                // console.log(j,i)
+                // console.log(matrix_ex.get([j,i]))
+                // console.log(m.get([j,i]))
+                if (m.get([j,i]) !== 0) {
+                  console.log("Occupied")
+                  return false;}
+              }
+            }
+            console.log("ok")
+            // for (let r=0; r<(x+dx); r++){
+            //   for (let clmn=0; clmn<(y+dy); clmn++){
+            //     if(m.get([r,clmn]) !== 0){ return false }
+            //   }
+            // }
+          } catch{return false;}
+          this.grid.subset(math.index(arrR, arrC), arr1);
+      } catch{return false;}
       
-      this.grid.subset(math.index(arrx, arry), arr1);
+      
+      
     }
     return true;
   }
@@ -91,7 +104,7 @@ export class GridDisplayComponent implements OnInit {
     return [c['position-x'] + 1 , c['position-y'] + 1]
   }
   getComponentDelta(c: IComponent){
-    return [c['rows'],c['columns']]
+    return [c['dx'],c['dy']]
   }
   getComponentPicture(c: IComponent){
     return [c['pic'],c['rotation']]
@@ -99,41 +112,34 @@ export class GridDisplayComponent implements OnInit {
 
 }
 
+// const matrix_ex = math.matrix([[1,2,3,10],[4,5,6,11],[7,8,9,12],[13,14,15,16]])
+// let m = math.subset(matrix_ex, math.index([0,1,2,3], [0,1,2,3]));
+
+//   // let k = math.zeros(dx,dy)
+        //   // console.log(m == k)
 
 
-// const schema = Joi.object({
-//   username: Joi.string()
-//       .alphanum()
-//       .min(3)
-//       .max(30)
-//       .required(),
-
-//   password: Joi.string()
-//       .pattern(new RegExp('^[a-zA-Z0-9]{3,30}$')),
-
-//   repeat_password: Joi.ref('password'),
-
-//   access_token: [
-//       Joi.string(),
-//       Joi.number()
-//   ],
-
-//   birth_year: Joi.number()
-//       .integer()
-//       .min(1900)
-//       .max(2013),
-
-//   email: Joi.string()
-//       .email({ minDomainSegments: 2, tlds: { allow: ['com', 'net'] } })
-// })
-//   .with('username', 'birth_year')
-//   .xor('password', 'access_token')
-//   .with('password', 'repeat_password');
+      // try{
+      //   let m = math.subset(this.grid, math.index(arrx, arry));
+      //   // let k = math.zeros(dx,dy)
+      //   // console.log(m == k)
+      //   for (let r=0; r<(x+dx); r++){
+      //     for (let clmn=0; clmn<(y+dy); clmn++){
+      //       if(m.get([r,clmn]) !== 0){ return false }
+      //     }
+      //   }
+      // }      catch (error){ console.log(error);return false;}
+      
+      // this.grid.subset(math.index(arrx, arry), arr1);
 
 
-// schema.validate({ username: 'abc', birth_year: 1994 });
-// schema.validate({});
-// try {
-//   const value = await schema.validateAsync({ username: 'abc', birth_year: 1994 });
-// }
-// catch (err) { }
+      // for (let i=x; i<(x+dx); i++){
+      //   for (let j=y; j<(y+dy); j++){
+      //     console.log(j,i)
+      //     // console.log(matrix_ex.get([j,i]))
+      //     console.log(this.grid.get([j,i]))
+      //     // if (m.get([j,i]) !== 0) {
+      //     //   console.log("Occupied")
+      //     //   return false;}
+      //   }
+      // }

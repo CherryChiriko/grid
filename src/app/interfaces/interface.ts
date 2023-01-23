@@ -1,6 +1,6 @@
 export interface IComponent {
-  rows: number;
-  columns: number;
+  dx: number;
+  dy: number;
   "position-x": number;
   "position-y": number;
   pic: string;
